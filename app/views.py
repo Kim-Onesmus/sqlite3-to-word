@@ -68,6 +68,7 @@ def AddNews(request):
 
 def Profile(request):
     user = request.user
+    print(user)
     form = UserForm(instance=user)
     password_form = PasswordChangeForm(request.user)
     if request.method == 'POST':
