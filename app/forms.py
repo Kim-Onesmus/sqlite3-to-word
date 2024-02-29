@@ -15,3 +15,4 @@ class NewsForm(forms.ModelForm):
     class Meta:
         model = News
         fields = '__all__'
+        exclude = ['user']

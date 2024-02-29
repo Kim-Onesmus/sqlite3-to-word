@@ -3,7 +3,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from .models import User
-from .forms import UserForm
+from .forms import UserForm, NewsForm
 
 # Create your views here.
 
@@ -63,7 +63,17 @@ def Index(request):
 
 
 def AddNews(request):
-    return render(request, 'app/add_news.html')
+    user = request.user
+    form = NewsForm(instance=user)
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'News uploaded')
+            return redirect('all_news')
+
+    context = {'form':form}
+    return render(request, 'app/add_news.html', context)
 
 
 def AllNews(request):
