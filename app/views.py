@@ -63,8 +63,11 @@ def Index(request):
 
 
 def AddNews(request):
-    pass
+    return render(request, 'app/add_news.html')
 
+
+def AllNews(request):
+    return render(request, 'app/all_news.html')
 
 def Profile(request):
     user = request.user
