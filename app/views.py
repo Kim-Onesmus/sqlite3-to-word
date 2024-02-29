@@ -24,7 +24,7 @@ def SignUp(request):
                 return redirect('signup')
 
             else:
-                user_details = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, mobile_no=mobile_no, password=password)
+                user_details = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=email, mobile_no=mobile_no, password=password)
                 user_details.save()
                 messages.info(request, 'Account created')
                 return redirect('login')
