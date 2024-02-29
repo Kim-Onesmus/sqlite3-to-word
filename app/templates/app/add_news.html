@@ -2,18 +2,7 @@
 {% block content %}
 {% load static %}
 <main id="main" class="main">
-
-  <div class="pagetitle">
-    <h1>Deposit</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-        <li class="breadcrumb-item active">Deposit</li>
-      </ol>
-    </nav>
-  </div><!-- End Page Title -->
   <div class="container">
-
     <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
       <div class="container">
         <div class="row justify-content-center">
@@ -29,12 +18,10 @@
               {% endfor %}
             </div>
             <div class="card mb-3">
-
               <div class="card-body">
-
                 <div class="pt-4 pb-2">
-                  <h5 class="card-title text-center pb-0 fs-4">Deposit/Save</h5>
-                  <p class="text-center small">Enter your phone number & amount to save</p>
+                  <h5 class="card-title text-center pb-0 fs-4">Add News</h5>
+                  <!-- <p class="text-center small">Enter your phone number & amount to save</p> -->
                 </div>
                 <form method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
                   {% csrf_token %}
