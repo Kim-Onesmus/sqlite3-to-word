@@ -23,42 +23,44 @@
           <div class="card-body">
             <h5 class="card-title"></h5>
 
-            <!-- Default Table -->
-            <table class="table">
-              <thead>
-                <tr>
-                  <!-- <th scope="col">#</th> -->
-                  <!-- <th scope="col">ID</th> -->
-                  <!-- <th scope="col">Transaction Code</th> -->
-                  <th scope="col">Author</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Text</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for data in deposits %}
-                <tr>
-                  <!-- <th scope="row">1</th> -->
-                  <!-- <td>{{ forloop.counter0 }}</td> -->
-                  <td>{{data.pay_id}}</td>
-                  <td>{{data.amount}}</td>
-                  <td>{{data.number}}</td>
-                  <td>{{data.created_date}}</td>
-                  <td>{{data.created_time}}</td>
+            <div class="table-responsive">
+              <table class="table table-striped custom-table mb-0">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col">#</th> -->
+                    <!-- <th scope="col">ID</th> -->
+                    <!-- <th scope="col">Transaction Code</th> -->
+                    <th scope="col">Author</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Text</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in all %}
+                  <tr>
+                    <td>{{data.user}}</td>
+                    <td>{{data.user.email}}</td>
+                    <td>{{data.category}}</td>
+                    <td>{{data.tittle}}</td>
+                    <td>{{data.text }}</td>
+                    <td>{{data.created_date}}</td>
+                    <td>{{data.created_time}}</td>
 
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-            <!-- End Default Table Example -->
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Default Table Example -->
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
   </section>
 
 </main>
