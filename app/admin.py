@@ -9,4 +9,4 @@ class UserTable(admin.ModelAdmin):
 
 @admin.register(News)
 class NewsTable(admin.ModelAdmin):
-    list_display = ('user', 'category', 'tittle', 'image', 'text', )
+    list_display = ('user', 'category', 'tittle', 'image', 'text', 'created_date', 'created_time')
