@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from .models import User
+from .forms import User
 
 # Create your views here.
 
@@ -62,3 +63,32 @@ def Index(request):
 
 def AddNews(request):
     pass
+
+
+def Profile(request):
+    user = request.user
+    form = UserForm(instance=user)
+    password_form = PasswordChangeForm(request.user)
+    if request.method == 'POST':
+        form = ClientForm(request.POST, request.FILES, instance=client)
+        password_form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Profile edited')
+            return redirect('profile')
+
+        if password_form.is_valid():
+            password_form.save()
+            messages.info(request, 'Profile information updated')
+            return redirect('login')
+    
+    context = {'form':form, 'password_form':password_form}
+    return render(request, 'app/account/profile.html', context)
+
+
+def Logout(request):
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.info(request, 'Logged Out')
+        return redirect('login')
+    return render(request, 'app/account/logout.html')
