@@ -7,7 +7,7 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=50, blank=False)
     email = models.EmailField(unique=True)
     mobile_no = PhoneNumberField(blank=False)
-    profile_pic = models.ImageField(upload_to=user_path_directory, blank=True, null=True, default='media/default.jpg')
+    profile_pic = models.ImageField(upload_to='media', blank=True, null=True, default='media/default.jpg')
     date_updated = models.DateTimeField(auto_now=True)
 
     
