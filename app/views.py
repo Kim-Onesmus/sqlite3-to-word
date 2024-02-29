@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
-from .models import User
+from .models import User, News
 from .forms import UserForm, NewsForm
 
 # Create your views here.
@@ -79,7 +79,10 @@ def AddNews(request):
 
 
 def AllNews(request):
-    return render(request, 'app/all_news.html')
+    all_news = News.objects.all()
+
+    context = {'all':all_news}
+    return render(request, 'app/all_news.html', context)
 
 def Profile(request):
     user = request.user
