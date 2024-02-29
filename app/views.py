@@ -64,11 +64,11 @@ def Login(request):
     return render(request, 'app/account/login.html')
 
 
-import sqlite3
-import pandas as pd
-from django.http import HttpResponse
-from django.shortcuts import render
-from .utils import export_to_word  # Assuming you have utils.py file
+def get_table_columns(table_name):
+    with connection.cursor() as cursor:
+        cursor.execute(f"PRAGMA table_info({table_name})")
+        columns = [column[1] for column in cursor.fetchall()]
+    return columns
 
 def Index(request):
     return render(request, 'app/index.html')
@@ -77,21 +77,12 @@ def export_word(request):
     if request.method == 'POST':
         selected_table = request.POST.get('selected_table', '')
         if selected_table:
-            db_name = "path/to/your/db.sqlite3"  # Update with the correct path
+            db_name = "db.sqlite3"  # Update with the correct path
 
-            if selected_table == 'user':
-                table_name = "user"
-                output_filename = "user_data.docx"
-                selected_columns = ["username", "email", "other_user_fields"]
-            elif selected_table == 'news':
-                table_name = "news"
-                output_filename = "news_data.docx"
-                selected_columns = ["title", "source", "relevance", "other_news_fields"]
-            else:
-                # Handle invalid table choice
-                return HttpResponse("Invalid table choice")
+            table_columns = get_table_columns(selected_table)
+            output_filename = f"{selected_table}_data.docx"
 
-            export_to_word(db_name, table_name, output_filename, selected_columns)
+            export_to_word(db_name, selected_table, output_filename, table_columns)
 
             # Provide the file for download
             with open(output_filename, 'rb') as docx_file:
@@ -99,6 +90,7 @@ def export_word(request):
                 response['Content-Disposition'] = f'attachment; filename={output_filename}'
                 return response
 
+    # Render the template with a form to choose the table
     return render(request, 'app/export/export_word.html')
 
 
