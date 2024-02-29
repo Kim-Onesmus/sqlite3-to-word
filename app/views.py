@@ -71,7 +71,7 @@ def Profile(request):
     form = UserForm(instance=user)
     password_form = PasswordChangeForm(request.user)
     if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES, instance=client)
+        form = UserForm(request.POST, request.FILES, instance=user)
         password_form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             form.save()
