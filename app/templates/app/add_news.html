@@ -26,6 +26,7 @@
                 <form method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
                   {% csrf_token %}
 
+                  {{form.user.as_hidden}}
                   <div class="col-6">
                     <label for="yourUsername" class="form-label">News Category</label>
                     <div class="input-group has-validation">

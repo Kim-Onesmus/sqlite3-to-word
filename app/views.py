@@ -66,19 +66,12 @@ def AddNews(request):
     if request.method == 'POST':
         form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
-            # Save the form without committing to get the instance
             news_instance = form.save(commit=False)
-            
-            # Set the author of the news instance to the logged-in user
-            news_instance.author = request.user
-
-            # Save the instance with the author information
+            news_instance.user = request.user
             news_instance.save()
-
             messages.info(request, 'News uploaded')
             return redirect('all_news')
     else:
-        # If it's not a POST request, initialize the form without an instance
         form = NewsForm()
 
     context = {'form': form}
