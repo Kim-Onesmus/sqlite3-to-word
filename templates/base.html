@@ -113,7 +113,7 @@
         </li>
         <li class="nav-item dropdown pe-3">
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{ user.client.profile_picture.url }}" alt="Profile" class="rounded-circle">
+            <img src="{{ user.profile_pic.url }}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block ps-2" id="userLastNameSpan"
               style="text-transform: capitalize;font-size: 20px;"> {{user.first_name}}.</span>
             <span>.</span>
@@ -140,7 +140,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="">
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'profile' %}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -150,27 +150,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="">
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>

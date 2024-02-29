@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Deposit History</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item">Deposits</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+
+            <!-- Default Table -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <!-- <th scope="col">#</th> -->
+                  <th scope="col">ID</th>
+                  <!-- <th scope="col">Transaction Code</th> -->
+                  <th scope="col">Amount</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in deposits %}
+                <tr>
+                  <!-- <th scope="row">1</th> -->
+                  <!-- <td>{{ forloop.counter0 }}</td> -->
+                  <td>{{data.pay_id}}</td>
+                  <td>{{data.amount}}</td>
+                  <td>{{data.number}}</td>
+                  <td>{{data.created_date}}</td>
+                  <td>{{data.created_time}}</td>
+
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <!-- End Default Table Example -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+{% endblock content %}
