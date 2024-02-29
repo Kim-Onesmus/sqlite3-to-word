@@ -3,7 +3,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from .models import User
-from .forms import User
+from .forms import UserForm
 
 # Create your views here.
 
@@ -71,7 +71,7 @@ def Profile(request):
     form = UserForm(instance=user)
     password_form = PasswordChangeForm(request.user)
     if request.method == 'POST':
-        form = ClientForm(request.POST, request.FILES, instance=client)
+        form = UserForm(request.POST, request.FILES, instance=client)
         password_form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             form.save()
