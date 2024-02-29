@@ -4,6 +4,12 @@ from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from .models import User, News
 from .forms import UserForm, NewsForm
+import sqlite3
+import pandas as pd
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.db import connection
+from .utils import export_to_word 
 
 # Create your views here.
 
