@@ -5,16 +5,6 @@
 
 <main id="main" class="main">
 
-  <div class="pagetitle">
-    <h1>Deposit History</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-        <li class="breadcrumb-item">Deposits</li>
-      </ol>
-    </nav>
-  </div><!-- End Page Title -->
-
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
@@ -24,14 +14,14 @@
             <h5 class="card-title"></h5>
 
             <div class="table-responsive">
-              <table class="table table-striped custom-table mb-0">
+              <table class="table">
                 <thead>
                   <tr>
                     <!-- <th scope="col">#</th> -->
                     <!-- <th scope="col">ID</th> -->
                     <!-- <th scope="col">Transaction Code</th> -->
                     <th scope="col">Author</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Category</th>
                     <th scope="col">Title</th>
                     <th scope="col">Text</th>
@@ -40,13 +30,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% for data in all %}
+                  {% for data in all reversed %}
                   <tr>
-                    <td>{{data.user}}</td>
-                    <td>{{data.user.email}}</td>
+                    <td>{{data.user.first_name}}</td>
+                    <td><img style="width: 100px; height: 100px;" src="{{data.image.url}}" alt=""></td>
                     <td>{{data.category}}</td>
                     <td>{{data.tittle}}</td>
-                    <td>{{data.text }}</td>
+                    <td style="word-wrap: break-word; max-width: 270px;">{{data.text }}</td>
                     <td>{{data.created_date}}</td>
                     <td>{{data.created_time}}</td>
 
