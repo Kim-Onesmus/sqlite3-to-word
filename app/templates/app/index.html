@@ -28,28 +28,15 @@
                 <div class="col-xxl-12 col-md-6">
                     <div class="card info-card sales-card">
 
-                        <div class="filter">
-                            <!-- <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a> -->
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
-
                         <div class="card-body">
-                            <h5 class="card-title">Account Balance <span></span></h5>
+                            <h5 class="card-title"> <span></span></h5>
 
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <h3> <b>KSH </b> </h3>
+                                    <h3> <b>.docx</b> </h3>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>{{total_amount}}</h6>
+                                    <h6>Export to Microsoft Word</h6>
                                     <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span
                                         class="text-muted small pt-2 ps-1">increase</span> -->
 
@@ -64,28 +51,15 @@
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card revenue-card">
 
-                        <div class="filter">
-                            <!-- <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a> -->
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
-
                         <div class="card-body">
-                            <h5 class="card-title">Target <span></span></h5>
+                            <h5 class="card-title"><span></span></h5>
 
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <h3> <b>KSH </b> </h3>
+                                    <h3> <b>.xls</b> </h3>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>{{existings_plan.target}}.00</h6>
+                                    <h6>Export to Excel</h6>
                                     <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span
                                         class="text-muted small pt-2 ps-1">increase</span> -->
 
@@ -99,31 +73,14 @@
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card sales-card">
 
-                        <div class="filter">
-                            <!-- <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a> -->
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
-
                         <div class="card-body">
-                            <h5 class="card-title">My Plan <span></span></h5>
-
+                            <h5 class="card-title"><span></span></h5>
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <h3> <b>KSH </b> </h3>
+                                    <h3> <b>.csv</b> </h3>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>{{existings_plan.amount}}.00</h6>
-                                    <span class="text-success small pt-1 fw-bold">{{existings_plan.plan}}</span>
-                                    <!-- <span class="text-muted small pt-2 ps-1">for 100 days</span> -->
-
+                                    <h6>Export to CSV</h6>
                                 </div>
                             </div>
                         </div>
@@ -135,33 +92,15 @@
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card revenue-card">
 
-                        <div class="filter">
-                            <!-- <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a> -->
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                        </div>
-
                         <div class="card-body">
-                            <h5 class="card-title">Remaining <span></span></h5>
+                            <h5 class="card-title"><span></span></h5>
 
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <h3> <b>KSH </b> </h3>
+                                    <h3> <b>.json</b> </h3>
                                 </div>
                                 <div class="ps-3">
-                                    {% if total_amount <= existings_plan.target %}
-                                    <h6>{{remaining}}</h6>
-                                    <span class="text-success small pt-1 fw-bold">{{remaining_days}} Days</span>
-                                    {% else %}
-                                    <span class="text-success small pt-1 fw-bold">Target reached <br>Update target to continue saving</span>
-                                    {% endif %}
+                                    <h6>Export to JSON</h6>
                                 </div>
                             </div>
                         </div>
