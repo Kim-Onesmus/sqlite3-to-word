@@ -17,9 +17,6 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <!-- <th scope="col">#</th> -->
-                    <!-- <th scope="col">ID</th> -->
-                    <!-- <th scope="col">Transaction Code</th> -->
                     <th scope="col">Author</th>
                     <th scope="col">Image</th>
                     <th scope="col">Category</th>
@@ -32,7 +29,7 @@
                 <tbody>
                   {% for data in all reversed %}
                   <tr>
-                    <td>{{data.user.first_name}}</td>
+                    <td>{{data.user.first_name}} <br> <a href="mailto:{{data.user.email}}">{{data.user.email}}</a></td>
                     <td><img style="width: 100px; height: 100px;" src="{{data.image.url}}" alt=""></td>
                     <td>{{data.category}}</td>
                     <td>{{data.tittle}}</td>
