@@ -1,0 +1,87 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Deposit</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                <li class="breadcrumb-item active">Deposit</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div id="floating">
+                            {% for message in messages %}
+                            <div class="alert {{message.tags}} alert-dismissible" role="alert">
+                                <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{message | safe}}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Export To Word</h5>
+                                    <!-- <p class="text-center small">Enter your phone number & amount to save</p> -->
+                                </div>
+                                <form method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                                    {% csrf_token %}
+
+                                    <div class="col-12">
+                                        <label for="yourUsername" class="form-label">Select Table</label>
+                                        <div class="input-group has-validation">
+                                            <select class="form-control" id="yourPassword" name="selected_table" required>
+                                                <option value="">____Select Table____</option>
+                                                <option value="user">User Table</option>
+                                                <option value="news">News Table</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please enter amount to save/deposit</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember" value="true"
+                                                id="rememberMe" required>
+                                            <label class="form-check-label" for="rememberMe">Confirm</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Submit</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<script>
+    var message_ele = document.getElementById("floating");
+    setTimeout(function () {
+        message_ele.style.display = "none"
+    }, 30000);
+</script>
+{% endblock content %}
