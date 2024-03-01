@@ -53,8 +53,8 @@
                                     <div class="col-12">
                                         <label for="yourUsername" class="form-label">Select Table Columns to Export</label>
                                         <div class="input-group has-validation">
-                                            <select class="form-control" id="yourPassword" name="selected_columns" required>
-                                                <option value="">____Select Table____</option>
+                                            <select class="form-control" id="yourPassword" name="selected_columns">
+                                                <option value="">____Select Columns____</option>
                                                 {% for data in table_columns %}
                                                 <option value="{{data}}">{{data}}</option>
                                                 {% endfor %}

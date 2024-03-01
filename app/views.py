@@ -64,12 +64,33 @@ def Login(request):
     return render(request, 'app/account/login.html')
 
 
+# def get_all_table_names():
+#     with connection.cursor() as cursor:
+#         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+#         tables = [table[0] for table in cursor.fetchall()]
+#     return tables
 
-def get_table_columns(table_name):
-    with connection.cursor() as cursor:
-        cursor.execute(f"PRAGMA table_info({table_name})")
-        columns = [column[1] for column in cursor.fetchall()]
-    return columns
+
+# def get_table_columns(table_name):
+#     with connection.cursor() as cursor:
+#         cursor.execute(f"PRAGMA table_info({table_name})")
+#         columns = [column[1] for column in cursor.fetchall()]
+#         print(f"Columns for {table_name}: {columns}")
+#     return columns
+
+
+
+def Index(request):
+    return render(request, 'app/index.html')
+
+
+# Import necessary libraries
+from django.http import HttpResponse
+from django.shortcuts import render
+import sqlite3
+
+# Assuming you have the connection object defined somewhere
+# connection = sqlite3.connect("db.sqlite3")
 
 def get_all_table_names():
     with connection.cursor() as cursor:
@@ -77,25 +98,37 @@ def get_all_table_names():
         tables = [table[0] for table in cursor.fetchall()]
     return tables
 
-def Index(request):
-    return render(request, 'app/index.html')
+def get_table_columns(table_name):
+    with connection.cursor() as cursor:
+        cursor.execute(f"PRAGMA table_info({table_name})")
+        columns = [column[1] for column in cursor.fetchall()]
+    return columns
+
 
 def export_word(request):
     tables = get_all_table_names()
+    selected_table = request.POST.get('selected_table', '')
+    table_columns = get_table_columns(selected_table) if selected_table else []
 
     if request.method == 'POST':
-        selected_table = request.POST.get('selected_table', '')
         selected_columns = request.POST.getlist('selected_columns')
+
+        print(f"Selected Table: {selected_table}")
+        print(f"Selected Columns: {selected_columns}")
 
         if selected_table:
             db_name = "db.sqlite3"  # Update with the correct path
 
             # If no columns are selected, export all columns
-            if not selected_columns:
+            if not any(selected_columns):
                 selected_columns = get_table_columns(selected_table)
+                print(f"Columns after get_table_columns: {selected_columns}")
+            else:
+                selected_columns = list(set(selected_columns))  # Ensure unique columns
 
             output_filename = f"{selected_table}_data.docx"
 
+            # Your export_to_word function implementation goes here
             export_to_word(db_name, selected_table, output_filename, selected_columns)
 
             # Provide the file for download
@@ -105,7 +138,7 @@ def export_word(request):
                 return response
 
     # Render the template with a form to choose the table and columns
-    return render(request, 'app/export/export_word.html', {'tables': tables, 'table_columns': []})
+    return render(request, 'app/export/export_word.html', {'tables': tables, 'table_columns': table_columns})
 
 
 
