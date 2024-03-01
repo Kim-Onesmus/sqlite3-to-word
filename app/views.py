@@ -64,25 +64,39 @@ def Login(request):
     return render(request, 'app/account/login.html')
 
 
+
 def get_table_columns(table_name):
     with connection.cursor() as cursor:
         cursor.execute(f"PRAGMA table_info({table_name})")
         columns = [column[1] for column in cursor.fetchall()]
     return columns
 
+def get_all_table_names():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        tables = [table[0] for table in cursor.fetchall()]
+    return tables
+
 def Index(request):
     return render(request, 'app/index.html')
 
 def export_word(request):
+    tables = get_all_table_names()
+
     if request.method == 'POST':
         selected_table = request.POST.get('selected_table', '')
+        selected_columns = request.POST.getlist('selected_columns')
+
         if selected_table:
             db_name = "db.sqlite3"  # Update with the correct path
 
-            table_columns = get_table_columns(selected_table)
+            # If no columns are selected, export all columns
+            if not selected_columns:
+                selected_columns = get_table_columns(selected_table)
+
             output_filename = f"{selected_table}_data.docx"
 
-            export_to_word(db_name, selected_table, output_filename, table_columns)
+            export_to_word(db_name, selected_table, output_filename, selected_columns)
 
             # Provide the file for download
             with open(output_filename, 'rb') as docx_file:
@@ -90,8 +104,8 @@ def export_word(request):
                 response['Content-Disposition'] = f'attachment; filename={output_filename}'
                 return response
 
-    # Render the template with a form to choose the table
-    return render(request, 'app/export/export_word.html')
+    # Render the template with a form to choose the table and columns
+    return render(request, 'app/export/export_word.html', {'tables': tables, 'table_columns': []})
 
 
 

@@ -44,10 +44,21 @@
                                         <div class="input-group has-validation">
                                             <select class="form-control" id="yourPassword" name="selected_table" required>
                                                 <option value="">____Select Table____</option>
-                                                <option value="app_user">User Table</option>
-                                                <option value="app_news">News Table</option>
+                                                {% for data in tables  %}
+                                                <option value="{{data}}">{{data}}</option>
+                                                {% endfor %}
                                             </select>
-                                            <div class="invalid-feedback">Please enter amount to save/deposit</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="yourUsername" class="form-label">Select Table Columns to Export</label>
+                                        <div class="input-group has-validation">
+                                            <select class="form-control" id="yourPassword" name="selected_columns" required>
+                                                <option value="">____Select Table____</option>
+                                                {% for data in table_columns %}
+                                                <option value="{{data}}">{{data}}</option>
+                                                {% endfor %}
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-12">
