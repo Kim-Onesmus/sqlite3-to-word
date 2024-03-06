@@ -4,12 +4,14 @@ from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from .models import User, News
 from .forms import UserForm, NewsForm
-import sqlite3
 import pandas as pd
 from django.http import HttpResponse
 from django.shortcuts import render
+import sqlite3
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.db import connection
-from .utils import export_to_word 
+from .utils import export_to_word, export_to_csv, export_to_excel, export_to_json
 
 # Create your views here.
 
@@ -84,14 +86,6 @@ def Index(request):
     return render(request, 'app/index.html')
 
 
-# Import necessary libraries
-from django.http import HttpResponse
-from django.shortcuts import render
-import sqlite3
-
-# Assuming you have the connection object defined somewhere
-# connection = sqlite3.connect("db.sqlite3")
-
 def get_all_table_names():
     with connection.cursor() as cursor:
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
@@ -139,6 +133,115 @@ def export_word(request):
 
     # Render the template with a form to choose the table and columns
     return render(request, 'app/export/export_word.html', {'tables': tables, 'table_columns': table_columns})
+
+def exportExcel(request):
+    tables = get_all_table_names()
+    selected_table = request.POST.get('selected_table', '')
+    table_columns = get_table_columns(selected_table) if selected_table else []
+
+    if request.method == 'POST':
+        selected_columns = request.POST.getlist('selected_columns')
+
+        print(f"Selected Table: {selected_table}")
+        print(f"Selected Columns: {selected_columns}")
+
+        if selected_table:
+            db_name = "db.sqlite3"  # Update with the correct path
+
+            # If no columns are selected, export all columns
+            if not any(selected_columns):
+                selected_columns = get_table_columns(selected_table)
+                print(f"Columns after get_table_columns: {selected_columns}")
+            else:
+                selected_columns = list(set(selected_columns))  # Ensure unique columns
+
+            output_filename = f"{selected_table}_data.xlsx"
+
+            # Your export_to_word function implementation goes here
+            export_to_excel(db_name, selected_table, output_filename, selected_columns)
+
+            # Provide the file for download
+            with open(output_filename, 'rb') as docx_file:
+                response = HttpResponse(docx_file.read(), content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                response['Content-Disposition'] = f'attachment; filename={output_filename}'
+                return response
+
+    # Render the template with a form to choose the table and columns
+    return render(request, 'app/export/export_excel.html', {'tables': tables, 'table_columns': table_columns})
+
+
+def exportCsv(request):
+    tables = get_all_table_names()
+    selected_table = request.POST.get('selected_table', '')
+    table_columns = get_table_columns(selected_table) if selected_table else []
+
+    if request.method == 'POST':
+        selected_columns = request.POST.getlist('selected_columns')
+
+        print(f"Selected Table: {selected_table}")
+        print(f"Selected Columns: {selected_columns}")
+
+        if selected_table:
+            db_name = "db.sqlite3"  # Update with the correct path
+
+            # If no columns are selected, export all columns
+            if not any(selected_columns):
+                selected_columns = get_table_columns(selected_table)
+                print(f"Columns after get_table_columns: {selected_columns}")
+            else:
+                selected_columns = list(set(selected_columns))  # Ensure unique columns
+
+            output_filename = f"{selected_table}_data.csv"
+
+            # Your export_to_word function implementation goes here
+            export_to_csv(db_name, selected_table, output_filename, selected_columns)
+
+            # Provide the file for download
+            with open(output_filename, 'rb') as docx_file:
+                response = HttpResponse(docx_file.read(), content_type="text/csv")
+                response['Content-Disposition'] = f'attachment; filename={output_filename}'
+                return response
+
+    # Render the template with a form to choose the table and columns
+    return render(request, 'app/export/export_csv.html', {'tables': tables, 'table_columns': table_columns})
+
+
+
+def exportJson(request):
+    tables = get_all_table_names()
+    selected_table = request.POST.get('selected_table', '')
+    table_columns = get_table_columns(selected_table) if selected_table else []
+
+    if request.method == 'POST':
+        selected_columns = request.POST.getlist('selected_columns')
+
+        print(f"Selected Table: {selected_table}")
+        print(f"Selected Columns: {selected_columns}")
+
+        if selected_table:
+            db_name = "db.sqlite3"  # Update with the correct path
+
+            # If no columns are selected, export all columns
+            if not any(selected_columns):
+                selected_columns = get_table_columns(selected_table)
+                print(f"Columns after get_table_columns: {selected_columns}")
+            else:
+                selected_columns = list(set(selected_columns))  # Ensure unique columns
+
+            output_filename = f"{selected_table}_data.json"
+
+            # Your export_to_word function implementation goes here
+            export_to_json(db_name, selected_table, output_filename, selected_columns)
+
+            # Provide the file for download
+            with open(output_filename, 'rb') as docx_file:
+                response = HttpResponse(docx_file.read(), content_type="application/json")
+                response['Content-Disposition'] = f'attachment; filename={output_filename}'
+                return response
+
+    # Render the template with a form to choose the table and columns
+    return render(request, 'app/export/export_json.html', {'tables': tables, 'table_columns': table_columns})
+    
 
 
 

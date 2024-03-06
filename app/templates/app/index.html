@@ -31,6 +31,7 @@
                         <div class="card-body">
                             <h5 class="card-title"> <span></span></h5>
 
+                            <a href="{% url 'export_word' %}">
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <h3> <b>.docx</b> </h3>
@@ -42,6 +43,7 @@
 
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                     </div>
@@ -53,7 +55,7 @@
 
                         <div class="card-body">
                             <h5 class="card-title"><span></span></h5>
-
+                            <a href="{% url 'export_excel' %}">
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <h3> <b>.xls</b> </h3>
@@ -65,6 +67,7 @@
 
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                     </div>
@@ -75,6 +78,7 @@
 
                         <div class="card-body">
                             <h5 class="card-title"><span></span></h5>
+                            <a href="{% url 'export_csv' %}">
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <h3> <b>.csv</b> </h3>
@@ -83,6 +87,7 @@
                                     <h6>Export to CSV</h6>
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                     </div>
@@ -94,7 +99,7 @@
 
                         <div class="card-body">
                             <h5 class="card-title"><span></span></h5>
-
+                            <a href="{% url 'export_json' %}">
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <h3> <b>.json</b> </h3>
@@ -103,6 +108,7 @@
                                     <h6>Export to JSON</h6>
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                     </div>
