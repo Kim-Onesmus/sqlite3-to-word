@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.SignUp, name='signup'),
     path('login', views.Login, name='login'),
     path('index', views.Index, name='index'),
+    path('get_table_columns', views.get_table_columns, name='get_table_columns'),
     path('export_word', views.export_word, name='export_word'),
     path('export_excel', views.exportExcel, name='export_excel'),
     path('export_csv', views.exportCsv, name='export_csv'),
