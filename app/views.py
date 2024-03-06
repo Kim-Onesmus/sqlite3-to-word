@@ -92,12 +92,11 @@ def get_all_table_names():
         tables = [table[0] for table in cursor.fetchall()]
     return tables
 
-
-from django.http import JsonResponse
-def get_table_columns(request):
-    selected_table = request.GET.get('selected_table', '')
-    columns = get_table_columns(selected_table)
-    return JsonResponse({'columns': columns})
+def get_table_columns(table_name):
+    with connection.cursor() as cursor:
+        cursor.execute(f"PRAGMA table_info({table_name})")
+        columns = [column[1] for column in cursor.fetchall()]
+    return columns
 
 
 def export_word(request):

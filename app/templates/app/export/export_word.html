@@ -53,9 +53,12 @@
                                     <div class="col-12">
                                         <label for="yourUsername" class="form-label">Select Table Columns to Export</label>
                                         <div class="input-group has-validation">
-
-                                                <label class="form-label">Select Columns</label>
-                                                <div id="columnCheckboxes"></div>
+                                            <select class="form-control" id="yourPassword" name="selected_columns">
+                                                {% for data in table_columns %}
+                                                <input type="checkbox" name="selected_columns" value="{{ column }}">
+                                                <label class="form-check-label">{{ column }}</label>
+                                                {% endfor %}
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -91,19 +94,17 @@
         message_ele.style.display = "none"
     }, 30000);
 </script>
-
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Function to update columns when the selected table changes
         function updateColumns() {
             var selectedTable = $('#yourPassword').val();
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: '{% url "get_table_columns" %}',  // Update with the correct URL
                 data: {'selected_table': selectedTable, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-                success: function (data) {
+                success: function(data) {
                     $('#columnCheckboxes').html(data);
                 }
             });
@@ -111,10 +112,9 @@
 
         // Trigger the function on page load and when the selected table changes
         updateColumns();
-        $('#yourPassword').on('change', function () {
+        $('#yourPassword').on('change', function() {
             updateColumns();
         });
     });
 </script>
-</main>
 {% endblock content %}
